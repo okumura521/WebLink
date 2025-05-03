@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebLink.Data;
 
@@ -10,9 +11,11 @@ using WebLink.Data;
 namespace WebLink.Migrations
 {
     [DbContext(typeof(WebLinkContext))]
-    partial class WebLinkContextModelSnapshot : ModelSnapshot
+    [Migration("20250503154256_AddIsPurchasedColumn")]
+    partial class AddIsPurchasedColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.11");
@@ -33,9 +36,6 @@ namespace WebLink.Migrations
                     b.Property<string>("Number")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("isPurchased")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

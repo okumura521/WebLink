@@ -9,5 +9,6 @@ namespace WebLink.Models
         public string Number { get; set; }
         [DataType(DataType.Date)]
         public DateTime HireDate { get; set; }
+        public bool isPurchased { get; set; } = false; // 初期値は購入前（false）
     }
 }

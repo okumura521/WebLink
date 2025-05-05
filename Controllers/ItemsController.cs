@@ -22,7 +22,15 @@ namespace WebLink.Controllers
         // GET: Items
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Item.ToListAsync());
+            //      return View(await _context.Item.ToListAsync());
+            return View(await _context.Item.Where(i => !i.isPurchased).ToListAsync());
+        }
+
+        //GET: Items 購入済
+        public async Task<IActionResult> PurchasedList()
+        {
+            var purchasedItems = await _context.Item.Where(i => i.isPurchased).ToListAsync();
+            return View(purchasedItems);
         }
 
         // GET: Items/Details/5

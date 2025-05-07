@@ -161,5 +161,18 @@ namespace WebLink.Controllers
         {
             return _context.Item.Any(e => e.Id == id);
         }
+        [HttpPost]
+        public IActionResult UpdatePurchaseStatus([FromBody] Item item)
+        {
+            var existingItem = _context.Item.Find(item.Id);
+            if (existingItem != null)
+            {
+                existingItem.isPurchased = item.isPurchased;
+                _context.SaveChanges();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+        }
+
     }
 }

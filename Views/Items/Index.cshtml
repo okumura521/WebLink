@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.HireDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.isPurchased)
+                @Html.CheckBoxFor(modelItem => item.isPurchased, new { @class = "purchase-checkbox", data_id = item.Id })
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">編集</a> |
@@ -52,3 +52,32 @@
     </tbody>
 </table>
 <a asp-action="PurchasedList" class="btn btn-primary">購入済みリストを見る</a>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".purchase-checkbox").forEach(function (checkbox) {
+            checkbox.addEventListener("change", function () {
+                let itemId = this.getAttribute("data-id");
+                let isChecked = this.checked;
+
+                 console.log("取得したID:", itemId); // 確認のため追加
+
+                fetch(`/Items/UpdatePurchaseStatus`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ Id: itemId, isPurchased: isChecked })
+                }).then(response => response.json())
+                    .then(data => {
+                        console.log("更新成功:", data);
+                        if (data.success) {
+                            location.reload(); // 成功したらページをリロード
+                        }
+                    })
+                    .catch(error => console.error("更新失敗:", error));
+            });
+        });
+    });
+</script>

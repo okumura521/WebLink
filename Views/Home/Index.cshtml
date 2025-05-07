@@ -9,6 +9,22 @@
         <input type="text" name="q" class="form-control me-2" placeholder="AI検索...">
         <button type="submit" class="btn btn-outline-primary">検索</button>
     </form>
-
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div id="countdown" class="text-3xl font-bold text-black bg-blue-500 shadow-lg rounded-lg p-6 text-center">
+    結婚10周年記念日まであと <span id="days"></span> 日 ✨
+</div>
+
+<script>
+    function updateCountdown() {
+        let anniversaryDate = new Date("2025-09-17"); // 記念日を設定
+        let now = new Date();
+        let diff = anniversaryDate - now;
+
+        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById("days").innerText = days;
+    }
+
+    updateCountdown(); // 初回呼び出し
+    setInterval(updateCountdown, 1000 * 60 * 60); // 1時間ごとに更新
+</script>
